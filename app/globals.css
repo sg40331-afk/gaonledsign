@@ -1,0 +1,522 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-sans);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) * 1.15);
+}
+
+:root {
+  --background: #f7fbff;
+  --foreground: #0b2238;
+  --card: #ffffff;
+  --card-foreground: #0b2238;
+  --primary: #0b7cff;
+  --primary-foreground: #ffffff;
+  --secondary: #eaf4ff;
+  --secondary-foreground: #0b2238;
+  --muted: #e8eef5;
+  --muted-foreground: #607185;
+  --accent: #ff8a1f;
+  --accent-foreground: #111827;
+  --border: #d8e3ef;
+  --input: #d8e3ef;
+  --ring: #2f8cff;
+  --radius: 0.5rem;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Pretendard', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', Arial, Helvetica, sans-serif;
+}
+a { text-decoration: none; }
+button, input, textarea, select { font: inherit; }
+summary::-webkit-details-marker { display: none; }
+.mobile-menu[open] .open-icon { display: none; }
+.mobile-menu[open] .close-icon { display: block; }
+
+.full-bleed-hero {
+  background:
+    linear-gradient(90deg, rgba(2, 9, 18, .86), rgba(7, 25, 43, .68) 42%, rgba(5, 16, 28, .15)),
+    radial-gradient(circle at 75% 40%, rgba(11, 124, 255, .45), transparent 34%),
+    linear-gradient(135deg, #061626, #0a2b4a 58%, #04101d);
+  border-bottom: 1px solid rgba(255,255,255,.12);
+}
+.page-hero {
+  background: linear-gradient(135deg, #061626, #08243f 58%, #0b7cff);
+  color: white;
+}
+.container-narrow {
+  width: min(1200px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 72px 0;
+  text-align: center;
+}
+.container-narrow p { color: #93d5ff; font-weight: 900; }
+.container-narrow h1 { margin: 12px auto; max-width: 820px; font-size: clamp(2.25rem, 5vw, 4.5rem); line-height: 1.08; font-weight: 950; letter-spacing: 0; }
+.container-narrow span { color: rgba(255,255,255,.76); font-weight: 700; }
+.container-section { width: min(1200px, calc(100% - 40px)); margin: 0 auto; padding: 64px 0; }
+.card { border: 1px solid #d8e3ef; border-radius: 0.5rem; background: white; padding: 1.25rem; box-shadow: 0 12px 30px rgba(8,36,63,.06); }
+.card h3 { margin-top: .85rem; color: #0b2238; font-size: 1.1rem; font-weight: 900; }
+.card p { margin-top: .55rem; color: #607185; font-size: .92rem; line-height: 1.65; }
+.primary-link { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; border-radius: .5rem; background: #0b7cff; padding: .75rem 1rem; color: white; font-weight: 900; }
+.secondary-link { display: inline-flex; min-height: 48px; align-items: center; justify-content: center; border-radius: .5rem; border: 1px solid #d8e3ef; background: white; padding: .75rem 1rem; color: #0b2238; font-weight: 900; }
+.form-input { min-height: 48px; width: 100%; border-radius: .5rem; border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.95); padding: .85rem 1rem; color: #0b2238; outline: none; }
+.form-input:focus { border-color: #5fb6ff; box-shadow: 0 0 0 3px rgba(95,182,255,.25); }
+.prose-area { color: #334155; font-size: 1.05rem; line-height: 1.9; }
+.prose-area p + p { margin-top: 1rem; }
+@media (max-width: 640px) {
+  .container-narrow, .container-section { width: min(100% - 40px, 1200px); }
+  .container-narrow { padding: 56px 0; }
+  .container-section { padding: 52px 0; }
+}
+
+.visual-panel img {
+  display: block;
+}
+.hero-led-panel {
+  box-shadow: 0 24px 70px rgba(0, 0, 0, .24);
+}
+.animated-led-screen {
+  position: absolute;
+  left: 31%;
+  top: 31%;
+  width: 46%;
+  height: 31%;
+  border-radius: 10px;
+  transform: skew(-4deg) perspective(600px) rotateY(-7deg);
+  background:
+    linear-gradient(115deg, transparent 0 16%, rgba(255,255,255,.65) 20%, transparent 25% 100%),
+    repeating-linear-gradient(100deg, rgba(11,124,255,.35) 0 18px, rgba(71,228,255,.3) 18px 34px, rgba(255,122,26,.34) 34px 50px);
+  mix-blend-mode: screen;
+  opacity: .82;
+  filter: saturate(1.25) blur(.2px);
+  animation: led-wave 3.8s linear infinite;
+}
+.animated-led-screen::after {
+  content: '';
+  position: absolute;
+  inset: -18%;
+  background: radial-gradient(circle at 45% 50%, rgba(71,228,255,.38), transparent 45%);
+  animation: led-pulse 2.6s ease-in-out infinite;
+}
+@keyframes led-wave {
+  from { background-position: -160px 0, 0 0; }
+  to { background-position: 260px 0, 120px 0; }
+}
+@keyframes led-pulse {
+  0%, 100% { opacity: .45; transform: scale(.96); }
+  50% { opacity: .9; transform: scale(1.05); }
+}
+@media (max-width: 768px) {
+  .animated-led-screen {
+    left: 29%;
+    top: 30%;
+    width: 49%;
+  }
+}
+
+.process-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: linear-gradient(90deg, #0b7cff, #47e4ff, #ff8a1f);
+}
+.process-card::after {
+  content: '';
+  position: absolute;
+  right: -26px;
+  bottom: -34px;
+  width: 92px;
+  height: 92px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(11,124,255,.16), transparent 68%);
+}
+.process-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-background-style {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    linear-gradient(90deg, rgba(2, 12, 24, .94) 0%, rgba(4, 18, 34, .84) 36%, rgba(6, 20, 35, .42) 66%, rgba(6, 16, 28, .18) 100%),
+    linear-gradient(180deg, rgba(2, 8, 18, .18), rgba(2, 8, 18, .48)),
+    url('/mockup-assets/hero-building-led.png') right center / cover no-repeat;
+}
+.hero-background-style::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(circle at 72% 45%, rgba(11,124,255,.28), transparent 26%);
+}
+.hero-led-motion {
+  position: absolute;
+  right: 11vw;
+  top: 29%;
+  z-index: 0;
+  width: min(520px, 34vw);
+  height: 160px;
+  border-radius: 14px;
+  transform: skew(-7deg) perspective(900px) rotateY(-10deg);
+  background:
+    linear-gradient(112deg, transparent 0 17%, rgba(255,255,255,.58) 20%, transparent 25% 100%),
+    repeating-linear-gradient(100deg, rgba(11,124,255,.35) 0 22px, rgba(71,228,255,.26) 22px 38px, rgba(255,122,26,.34) 38px 58px);
+  mix-blend-mode: screen;
+  opacity: .72;
+  filter: saturate(1.3) blur(.2px);
+  animation: hero-led-flow 3.6s linear infinite;
+  pointer-events: none;
+}
+.hero-led-motion::after {
+  content: '';
+  position: absolute;
+  inset: -22%;
+  background: radial-gradient(circle at 48% 50%, rgba(71,228,255,.45), transparent 48%);
+  animation: led-pulse 2.4s ease-in-out infinite;
+}
+@keyframes hero-led-flow {
+  from { background-position: -190px 0, 0 0; }
+  to { background-position: 320px 0, 140px 0; }
+}
+@media (max-width: 900px) {
+  .hero-background-style {
+    background:
+      linear-gradient(180deg, rgba(2, 12, 24, .92), rgba(2, 12, 24, .72)),
+      url('/mockup-assets/hero-building-led.png') center / cover no-repeat;
+  }
+  .hero-led-motion {
+    right: 8vw;
+    top: 22%;
+    width: 56vw;
+    height: 110px;
+    opacity: .45;
+  }
+}
+
+.hero-background-style {
+  background:
+    linear-gradient(90deg, rgba(2, 12, 24, .94) 0%, rgba(4, 18, 34, .86) 34%, rgba(6, 20, 35, .46) 62%, rgba(6, 16, 28, .18) 100%),
+    linear-gradient(180deg, rgba(2, 8, 18, .1), rgba(2, 8, 18, .48)),
+    url('/mockup-assets/hero-building-led.png') right center / cover no-repeat;
+  animation: hero-bg-breathe 14s ease-in-out infinite alternate;
+}
+.hero-led-motion {
+  inset: 0;
+  right: auto;
+  top: auto;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  transform: none;
+  background:
+    linear-gradient(112deg, transparent 0 34%, rgba(71, 228, 255, .18) 43%, rgba(255, 138, 31, .16) 51%, transparent 62% 100%),
+    radial-gradient(circle at 72% 40%, rgba(11, 124, 255, .25), transparent 22%),
+    radial-gradient(circle at 84% 58%, rgba(255, 138, 31, .22), transparent 20%);
+  mix-blend-mode: screen;
+  opacity: .82;
+  filter: saturate(1.25);
+  animation: hero-wide-light 7s ease-in-out infinite alternate;
+}
+.hero-led-motion::after {
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.08), transparent);
+  transform: translateX(-55%);
+  animation: hero-soft-sweep 6.5s ease-in-out infinite;
+}
+@keyframes hero-bg-breathe {
+  from { background-size: auto, auto, 100% auto; background-position: center, center, right center; }
+  to { background-size: auto, auto, 104% auto; background-position: center, center, right center; }
+}
+@keyframes hero-wide-light {
+  from { opacity: .5; transform: translate3d(-2%, 0, 0); }
+  to { opacity: .9; transform: translate3d(2%, 0, 0); }
+}
+@keyframes hero-soft-sweep {
+  0% { transform: translateX(-65%); opacity: 0; }
+  35% { opacity: .42; }
+  100% { transform: translateX(65%); opacity: 0; }
+}
+@media (max-width: 900px) {
+  .hero-background-style {
+    animation: none;
+    background:
+      linear-gradient(180deg, rgba(2, 12, 24, .92), rgba(2, 12, 24, .7)),
+      url('/mockup-assets/hero-building-led.png') center / cover no-repeat;
+  }
+  .hero-led-motion {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: .5;
+  }
+}
+
+.hero-background-style {
+  background:
+    linear-gradient(90deg, rgba(2, 12, 24, .96) 0%, rgba(4, 18, 34, .88) 36%, rgba(6, 20, 35, .42) 68%, rgba(6, 16, 28, .08) 100%),
+    linear-gradient(180deg, rgba(2, 8, 18, .12), rgba(2, 8, 18, .52)),
+    url('/mockup-assets/hero-building-led.png') right center / contain no-repeat,
+    linear-gradient(135deg, #061626, #08243f 58%, #020914);
+  animation: hero-bg-breathe-contained 14s ease-in-out infinite alternate;
+}
+@keyframes hero-bg-breathe-contained {
+  from { background-size: auto, auto, auto 100%, auto; background-position: center, center, right center, center; }
+  to { background-size: auto, auto, auto 102%, auto; background-position: center, center, right center, center; }
+}
+@media (max-width: 900px) {
+  .hero-background-style {
+    background:
+      linear-gradient(180deg, rgba(2, 12, 24, .9), rgba(2, 12, 24, .74)),
+      url('/mockup-assets/hero-building-led.png') center bottom / contain no-repeat,
+      linear-gradient(135deg, #061626, #08243f 58%, #020914);
+  }
+}
+
+.hero-led-motion {
+  left: auto;
+  right: clamp(70px, 8vw, 150px);
+  top: 28%;
+  width: min(780px, 45vw);
+  height: min(250px, 21vw);
+  border-radius: 0;
+  clip-path: polygon(2% 31%, 100% 0, 100% 82%, 0 100%);
+  transform: perspective(900px) rotateY(-4deg) skewY(-2deg);
+  background:
+    linear-gradient(108deg, transparent 0 30%, rgba(255,255,255,.28) 38%, transparent 47% 100%),
+    linear-gradient(100deg, rgba(0,178,255,.14), rgba(255,132,28,.18) 48%, rgba(0,116,255,.12));
+  mix-blend-mode: screen;
+  opacity: .58;
+  filter: saturate(1.2) blur(.15px);
+  animation: led-panel-shimmer 5.8s ease-in-out infinite alternate;
+}
+.hero-led-motion::after {
+  inset: 0;
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,.08) 0 1px, transparent 1px 7px),
+    linear-gradient(90deg, transparent, rgba(71,228,255,.16), transparent);
+  transform: translateX(-40%);
+  animation: led-panel-sweep 4.8s ease-in-out infinite;
+}
+@keyframes led-panel-shimmer {
+  from { opacity: .36; background-position: -120px 0, 0 0; }
+  to { opacity: .66; background-position: 180px 0, 24px 0; }
+}
+@keyframes led-panel-sweep {
+  0% { transform: translateX(-55%); opacity: 0; }
+  35% { opacity: .38; }
+  100% { transform: translateX(55%); opacity: 0; }
+}
+@media (max-width: 900px) {
+  .hero-led-motion {
+    right: 9vw;
+    top: 38%;
+    width: 72vw;
+    height: 24vw;
+    opacity: .42;
+  }
+}
+
+.hero-led-motion {
+  display: none;
+}
+.hero-background-style {
+  animation: hero-whole-drift 18s ease-in-out infinite alternate;
+  background:
+    linear-gradient(90deg, rgba(2, 12, 24, .96) 0%, rgba(4, 18, 34, .88) 36%, rgba(6, 20, 35, .42) 68%, rgba(6, 16, 28, .08) 100%),
+    linear-gradient(180deg, rgba(2, 8, 18, .12), rgba(2, 8, 18, .52)),
+    url('/mockup-assets/hero-building-led.png') right center / contain no-repeat,
+    linear-gradient(135deg, #061626, #08243f 58%, #020914);
+}
+@keyframes hero-whole-drift {
+  0% {
+    background-size: auto, auto, auto 100%, auto;
+    background-position: center, center, right center, center;
+  }
+  100% {
+    background-size: auto, auto, auto 103%, auto;
+    background-position: center, center, calc(100% - 18px) center, center;
+  }
+}
+@media (max-width: 900px) {
+  .hero-background-style {
+    animation: hero-mobile-drift 18s ease-in-out infinite alternate;
+  }
+}
+@keyframes hero-mobile-drift {
+  0% {
+    background-size: auto, auto 96%, auto;
+    background-position: center, center bottom, center;
+  }
+  100% {
+    background-size: auto, auto 100%, auto;
+    background-position: center, center bottom, center;
+  }
+}
+
+/* Latest hero motion: subtle zoom out, then zoom in as one full background image. */
+.hero-led-motion {
+  display: none !important;
+}
+.hero-background-style {
+  animation: hero-gentle-zoom 20s ease-in-out infinite !important;
+  background:
+    linear-gradient(90deg, rgba(2, 12, 24, .96) 0%, rgba(4, 18, 34, .88) 36%, rgba(6, 20, 35, .42) 68%, rgba(6, 16, 28, .08) 100%),
+    linear-gradient(180deg, rgba(2, 8, 18, .12), rgba(2, 8, 18, .52)),
+    url('/mockup-assets/hero-building-led.png') right center / auto 100% no-repeat,
+    linear-gradient(135deg, #061626, #08243f 58%, #020914) !important;
+}
+@keyframes hero-gentle-zoom {
+  0% {
+    background-size: auto, auto, auto 100%, auto;
+    background-position: center, center, right center, center;
+  }
+  45% {
+    background-size: auto, auto, auto 96.5%, auto;
+    background-position: center, center, right center, center;
+  }
+  100% {
+    background-size: auto, auto, auto 103%, auto;
+    background-position: center, center, right center, center;
+  }
+}
+@media (max-width: 900px) {
+  .hero-background-style {
+    animation: hero-mobile-gentle-zoom 20s ease-in-out infinite !important;
+    background:
+      linear-gradient(180deg, rgba(2, 12, 24, .9), rgba(2, 12, 24, .74)),
+      url('/mockup-assets/hero-building-led.png') center bottom / auto 96% no-repeat,
+      linear-gradient(135deg, #061626, #08243f 58%, #020914) !important;
+  }
+}
+@keyframes hero-mobile-gentle-zoom {
+  0% {
+    background-size: auto, auto 96%, auto;
+    background-position: center, center bottom, center;
+  }
+  45% {
+    background-size: auto, auto 92%, auto;
+    background-position: center, center bottom, center;
+  }
+  100% {
+    background-size: auto, auto 100%, auto;
+    background-position: center, center bottom, center;
+  }
+}
+
+/* Visible hero motion: animate the actual image layer, not only background-size. */
+.hero-background-style {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    linear-gradient(90deg, rgba(2, 12, 24, .96) 0%, rgba(4, 18, 34, .88) 36%, rgba(6, 20, 35, .42) 68%, rgba(6, 16, 28, .08) 100%),
+    linear-gradient(180deg, rgba(2, 8, 18, .12), rgba(2, 8, 18, .52)),
+    linear-gradient(135deg, #061626, #08243f 58%, #020914) !important;
+  animation: none !important;
+}
+.hero-background-style::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: url('/mockup-assets/hero-building-led.png') right center / auto 100% no-repeat;
+  transform-origin: right center;
+  animation: hero-image-breathe-visible 12s ease-in-out infinite;
+  will-change: transform;
+}
+.hero-background-style::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(2, 12, 24, .96) 0%, rgba(4, 18, 34, .88) 36%, rgba(6, 20, 35, .42) 68%, rgba(6, 16, 28, .08) 100%),
+    linear-gradient(180deg, rgba(2, 8, 18, .1), rgba(2, 8, 18, .5)),
+    radial-gradient(circle at 73% 45%, rgba(11,124,255,.22), transparent 28%);
+  pointer-events: none;
+}
+@keyframes hero-image-breathe-visible {
+  0% { transform: scale(1); }
+  45% { transform: scale(.94); }
+  100% { transform: scale(1.08); }
+}
+@media (max-width: 900px) {
+  .hero-background-style {
+    background: linear-gradient(135deg, #061626, #08243f 58%, #020914) !important;
+  }
+  .hero-background-style::before {
+    background-position: center bottom;
+    background-size: auto 92%;
+    transform-origin: center bottom;
+  }
+  .hero-background-style::after {
+    background: linear-gradient(180deg, rgba(2, 12, 24, .9), rgba(2, 12, 24, .72));
+  }
+}
+
+/* Hero motion update: always zoom in, then restart. */
+.hero-background-style::before {
+  animation: hero-image-zoom-in-loop 14s linear infinite !important;
+}
+@keyframes hero-image-zoom-in-loop {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.12); }
+}
+
+/* Hero motion update: smoother zoom-in loop with a soft reset fade. */
+.hero-background-style {
+  background:
+    linear-gradient(90deg, rgba(2, 12, 24, .96) 0%, rgba(4, 18, 34, .88) 36%, rgba(6, 20, 35, .42) 68%, rgba(6, 16, 28, .08) 100%),
+    linear-gradient(180deg, rgba(2, 8, 18, .12), rgba(2, 8, 18, .52)),
+    url('/mockup-assets/hero-building-led.png') right center / auto 100% no-repeat,
+    linear-gradient(135deg, #061626, #08243f 58%, #020914) !important;
+}
+.hero-background-style::before {
+  animation: hero-image-zoom-in-soft-loop 16s ease-in-out infinite !important;
+}
+@keyframes hero-image-zoom-in-soft-loop {
+  0% { opacity: 0; transform: scale(1); }
+  8% { opacity: 1; transform: scale(1.01); }
+  82% { opacity: 1; transform: scale(1.105); }
+  100% { opacity: 0; transform: scale(1.13); }
+}
+@media (max-width: 900px) {
+  .hero-background-style {
+    background:
+      linear-gradient(180deg, rgba(2, 12, 24, .9), rgba(2, 12, 24, .74)),
+      url('/mockup-assets/hero-building-led.png') center bottom / auto 92% no-repeat,
+      linear-gradient(135deg, #061626, #08243f 58%, #020914) !important;
+  }
+}
