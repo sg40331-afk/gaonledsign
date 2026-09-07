@@ -26,10 +26,10 @@ if (result.status !== 0) {
   process.exit(result.status ?? 1);
 }
 
-const requestedOutput = resolve('.output');
+const requestedOutput = resolve('.vercel', 'output');
 
 if (!existsSync(requestedOutput)) {
-  console.error('Build completed, but .output was not generated.');
+  console.error('Build completed, but .vercel/output was not generated.');
   process.exit(1);
 }
 
