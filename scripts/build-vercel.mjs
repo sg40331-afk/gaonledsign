@@ -1,5 +1,5 @@
 import { spawnSync } from 'node:child_process';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const viteCli = resolve('node_modules', 'vite', 'bin', 'vite.js');
@@ -31,6 +31,27 @@ const requestedOutput = resolve('.vercel', 'output');
 if (!existsSync(requestedOutput)) {
   console.error('Build completed, but .vercel/output was not generated.');
   process.exit(1);
+}
+
+const ssrEntry = resolve(
+  '.vercel',
+  'output',
+  'functions',
+  '__server.func',
+  '_ssr',
+  'ssr.mjs',
+);
+
+if (existsSync(ssrEntry)) {
+  const source = readFileSync(ssrEntry, 'utf8');
+  const brokenCall = "let t=await(await import(`./rsc.mjs`)).default(e);";
+  const fixedCall =
+    "let n=await import(`./rsc.mjs`),t=await(n.default?.fetch?n.default.fetch(e):n.default(e));";
+
+  if (source.includes(brokenCall)) {
+    writeFileSync(ssrEntry, source.replace(brokenCall, fixedCall));
+    console.log('Patched Vinext SSR entry for Vercel runtime.');
+  }
 }
 
 process.exit(0);
