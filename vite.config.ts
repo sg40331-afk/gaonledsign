@@ -60,9 +60,9 @@ export default defineConfig(async () => {
         ? [
             nitro({
               output: {
-                dir: '.output',
-                serverDir: '.output/functions/__server.func',
-                publicDir: '.output/static',
+                dir: '.vercel/output',
+                serverDir: '.vercel/output/functions/__server.func',
+                publicDir: '.vercel/output/static',
               },
             }),
           ]
