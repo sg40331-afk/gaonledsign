@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="가온전광판">
+  <rect width="64" height="64" rx="12" fill="#061626"/>
+  <rect x="10" y="16" width="44" height="24" rx="4" fill="#0b7cff"/>
+  <path d="M14 32c10-12 22-12 36 0" fill="none" stroke="#47e4ff" stroke-width="4" stroke-linecap="round"/>
+  <path d="M14 38c11-7 22-7 36 0" fill="none" stroke="#ff8a1f" stroke-width="4" stroke-linecap="round"/>
+  <text x="32" y="55" text-anchor="middle" font-family="Arial" font-size="10" font-weight="700" fill="white">GAON</text>
+</svg>
